@@ -8,16 +8,12 @@
 
   undefined在JavaScript中并不属于保留字/关键字，因此在IE5.5~8中我们可以将其当作变量那样对其赋值（IE9+及其他现代浏览器中赋值给undefined将无效）
 
-
-复制代码
 var undefinedBackup = undefined;
 undefined = 1;
 // 显示"undefined"
 console.log(typeof undefinedBackup);  
 // 在IE5.5~8中显示"number"，其他浏览器中则显示"undefined"
 console.log(typeof undefined);
-
-复制代码
 
   于是采用void方式获取undefined则成了通用准则。
 
@@ -43,8 +39,6 @@ NOTE: GetValue must be called even though its value is not used because it may h
 
 　　2. void会对其后的运算数作取值操作，因此若属性有个getter函数，那么就会调用getter函数（因此会产生副作用）
 
-
-复制代码
 var article = {
     _view: 0,
     get view(){
@@ -56,12 +50,8 @@ var test = void article.view; // 显示0
 console.log(test); // 显示undefined
 console.log(article._view); // 显示1
 
-复制代码
-
    通过一元运算符 delete 作对比，delete的其中一个行为特点是不对其运算数进行取值操作（delete的其他行为特点比我们想的复杂得多，这里就不详细记录了）
 
-
-复制代码
 var article = {
     _view: 0,
     get view(){
@@ -72,10 +62,6 @@ var article = {
 var ret = delete article.view;
 console.log(ret); // 显示true
 console.log(article._view); // 显示0
-
-复制代码
-
- 
 
 四、还有啥方式可以得到纯正的undefined？　　　　　　　　　　　　　　　　
 
@@ -88,8 +74,6 @@ console.log(typeof myUndefined); // 显示"undefined"
 
   2. 未赋值的实参（和未赋值的变量同理）
 
-
-复制代码
 var getUndefined = function(undefined){
   return undefined;
 };
@@ -98,8 +82,6 @@ var myUndefined = getUndefined();
 var getUndefined = function(){
   return arguments[arguments.length];
 };
-
-复制代码
 
   3. 无返回值函数
 
